@@ -24,8 +24,6 @@ public class GroundSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
-      Debug.Log(collider.gameObject.name);
-      Debug.Log(collider.gameObject.transform.position);
     }
   }
 

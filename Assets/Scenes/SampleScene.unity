@@ -936,15 +936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f659918d3ac48f448a9d599cb853ab46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
-  _groundSensor: {fileID: 0}
-  inputHorizontal: 0
+  _rigidBody: {fileID: 304835659}
   playerSpeed: 5
-  direction: 1
-  jumpForce: 14
-  _attackDamage: 10
-  _attackRadius: 0.3
-  _hitBoxPosition: {fileID: 82664146}
+  jumpForce: 6
+  groundSensor: {fileID: 1572988286}
 --- !u!1 &313077495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,7 +2853,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 52150490, guid: 6a535c1d4cd2e234694c42e0eb0155f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
