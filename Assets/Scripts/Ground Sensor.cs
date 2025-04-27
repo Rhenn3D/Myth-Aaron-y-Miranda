@@ -10,6 +10,9 @@ public class GroundSensor : MonoBehaviour
   [Header("Oshkarsh Jump")]
   public bool isGrounded;
   public float jumpForce = 12;
+  private AudioSource runSound;
+  public AudioClip runVFX;
+
 
 
 
@@ -17,6 +20,8 @@ public class GroundSensor : MonoBehaviour
   void Awake()
   {
     _rigidBody = GetComponentInParent<Rigidbody2D>();
+    runSound = GetComponent<AudioSource>();
+
   }
    
   void OnTriggerEnter2D(Collider2D collider)
@@ -24,6 +29,7 @@ public class GroundSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
+       runSound.PlayOneShot(runVFX);
     }
   }
 
@@ -42,6 +48,7 @@ public class GroundSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = false;
+      runSound.Stop();
     }
   } 
 
