@@ -16,6 +16,8 @@ public class Oskar : MonoBehaviour
 
     private AudioSource jumpSound;
     public AudioClip jumpVFX;
+    private AudioSource runSound;
+  public AudioClip runVFX;
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -23,6 +25,9 @@ public class Oskar : MonoBehaviour
         _animator = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
         jumpSound.clip = jumpVFX;
+        _rigidBody = GetComponentInParent<Rigidbody2D>();
+        runSound = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -51,6 +56,7 @@ public class Oskar : MonoBehaviour
             }
             else
                 _animator.SetBool("IsRunning", false);
+            
 
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
@@ -66,6 +72,7 @@ public class Oskar : MonoBehaviour
         }
         _animator.SetBool("IsJumping", !groundSensor.isGrounded);
         }
+            
 
 
 }
