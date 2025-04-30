@@ -19,6 +19,9 @@ public class Oskar : MonoBehaviour
     [SerializeField] private AudioSource runAudioSource;
   public AudioClip runSFX;
   private bool _alredyPlaying = false;
+  private ParticleSystem particleSystem;
+  private Transform particlesTransform;
+  private Vector3 particlesPosition;
 
     void Awake()
     {
@@ -27,6 +30,9 @@ public class Oskar : MonoBehaviour
         _animator = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
         jumpSound.clip = jumpSFX;
+        particleSystem = GetComponentInChildren<ParticleSystem>();
+        particlesTransform = particleSystem.transform;
+        particlesPosition = particlesTransform.localPosition;
         
 
     }
@@ -84,12 +90,20 @@ public class Oskar : MonoBehaviour
     {
     if(groundSensor.isGrounded && Input.GetAxisRaw("Horizontal") != 0 && !_alredyPlaying)
         {
+        
         runAudioSource.Play();
+        particleSystem.Play();
+        particlesTransform.SetParent(gameObject.transform);
+        particlesTransform.localPosition = particlesPosition;
+        particlesTransform.rotation = transform.rotation;
         _alredyPlaying = true;
         }
         else if(!groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
         {
+        
          runAudioSource.Stop();
+         particleSystem.Stop();
+         particlesTransform.SetParent(null);
         _alredyPlaying = false;
         }
     }

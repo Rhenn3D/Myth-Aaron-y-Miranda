@@ -10,8 +10,7 @@ public class GroundSensor : MonoBehaviour
   [Header("Oshkarsh Jump")]
   public bool isGrounded;
   public float jumpForce = 12;
-  private AudioSource runSound;
-  public AudioClip runVFX;
+
 
 
 
@@ -20,7 +19,7 @@ public class GroundSensor : MonoBehaviour
   void Awake()
   {
     _rigidBody = GetComponentInParent<Rigidbody2D>();
-    runSound = GetComponent<AudioSource>();
+
 
   }
    
