@@ -202,7 +202,7 @@ TextureImporter:
         width: 222
         height: 306
       alignment: 9
-      pivot: {x: 0.5860361, y: 1.1349673}
+      pivot: {x: 0.5860361, y: 1.134967}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

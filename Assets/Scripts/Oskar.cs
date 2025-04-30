@@ -15,24 +15,31 @@ public class Oskar : MonoBehaviour
     private Animator _animator;
 
     private AudioSource jumpSound;
-    public AudioClip jumpVFX;
-    private AudioSource runSound;
-  public AudioClip runVFX;
+    public AudioClip jumpSFX;
+    [SerializeField] private AudioSource runAudioSource;
+  public AudioClip runSFX;
+  private bool _alredyPlaying = false;
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         groundSensor = GetComponentInChildren<GroundSensor>();
         _animator = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
-        jumpSound.clip = jumpVFX;
-        _rigidBody = GetComponentInParent<Rigidbody2D>();
-        runSound = GetComponent<AudioSource>();
+        jumpSound.clip = jumpSFX;
+        
 
+    }
+    void Start()
+    {
+        runAudioSource.loop = true;
+        runAudioSource.clip = runSFX;
     }
 
     void Update()
     {
         Jump();
+        PlayerStepsSounds();
     }
 
     void FixedUpdate()
@@ -55,7 +62,7 @@ public class Oskar : MonoBehaviour
             _animator.SetBool("IsRunning", true);
             }
             else
-                _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsRunning", false);
             
 
 
@@ -68,12 +75,25 @@ public class Oskar : MonoBehaviour
             _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             _animator.SetBool("IsRunning", false);
             _animator.SetBool("IsJumping", true);
-            jumpSound.PlayOneShot(jumpVFX);
+            jumpSound.PlayOneShot(jumpSFX);
         }
         _animator.SetBool("IsJumping", !groundSensor.isGrounded);
         }
-            
 
+    void PlayerStepsSounds()
+    {
+    if(groundSensor.isGrounded && Input.GetAxisRaw("Horizontal") != 0 && !_alredyPlaying)
+        {
+        runAudioSource.Play();
+        _alredyPlaying = true;
+        }
+        else if(!groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
+        {
+         runAudioSource.Stop();
+        _alredyPlaying = false;
+        }
+    }
 
 }
+
 

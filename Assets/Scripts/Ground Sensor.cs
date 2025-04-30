@@ -29,7 +29,6 @@ public class GroundSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
-       runSound.PlayOneShot(runVFX);
     }
   }
 
@@ -48,7 +47,6 @@ public class GroundSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = false;
-      runSound.Stop();
     }
   } 
 
