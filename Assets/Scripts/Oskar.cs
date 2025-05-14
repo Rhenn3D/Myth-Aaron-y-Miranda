@@ -6,7 +6,7 @@ public class Oskar : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D _rigidBody; 
-
+    private BoxCollider2D boxcollider2D;
     public float playerSpeed = 5f;
     public float jumpForce = 8f;
 
@@ -19,19 +19,20 @@ public class Oskar : MonoBehaviour
     [SerializeField] private AudioSource runAudioSource;
   public AudioClip runSFX;
   private bool _alredyPlaying = false;
-  private ParticleSystem particleSystem;
+  private ParticleSystem particleSystemm;
   private Transform particlesTransform;
   private Vector3 particlesPosition;
 
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        boxcollider2D = GetComponent<BoxCollider2D>();
         groundSensor = GetComponentInChildren<GroundSensor>();
         _animator = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
         jumpSound.clip = jumpSFX;
-        particleSystem = GetComponentInChildren<ParticleSystem>();
-        particlesTransform = particleSystem.transform;
+        particleSystemm = GetComponentInChildren<ParticleSystem>();
+        particlesTransform = particleSystemm.transform;
         particlesPosition = particlesTransform.localPosition;
         
 
@@ -44,8 +45,16 @@ public class Oskar : MonoBehaviour
 
     void Update()
     {
-        Jump();
+        if(Input.GetButtonDown("Jump"))
+        {
+            if(groundSensor.isGrounded || groundSensor.canDobleJump)
+            {
+               Jump(); 
+            }
+        }
         PlayerStepsSounds();
+
+        _animator.SetBool("IsJumping", !groundSensor.isGrounded);
     }
 
     void FixedUpdate()
@@ -76,14 +85,14 @@ public class Oskar : MonoBehaviour
     }
     void Jump()
         {
-        if(Input.GetButtonDown("Jump") && groundSensor.isGrounded == true)
-        {
+            if(!groundSensor.isGrounded)
+            {
+                groundSensor.canDobleJump = false;
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
+            }
+        
             _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            _animator.SetBool("IsRunning", false);
-            _animator.SetBool("IsJumping", true);
             jumpSound.PlayOneShot(jumpSFX);
-        }
-        _animator.SetBool("IsJumping", !groundSensor.isGrounded);
         }
 
     void PlayerStepsSounds()
@@ -92,7 +101,7 @@ public class Oskar : MonoBehaviour
         {
         
         runAudioSource.Play();
-        particleSystem.Play();
+        particleSystemm.Play();
         particlesTransform.SetParent(gameObject.transform);
         particlesTransform.localPosition = particlesPosition;
         particlesTransform.rotation = transform.rotation;
@@ -102,11 +111,13 @@ public class Oskar : MonoBehaviour
         {
         
          runAudioSource.Stop();
-         particleSystem.Stop();
+         particleSystemm.Stop();
          particlesTransform.SetParent(null);
         _alredyPlaying = false;
         }
     }
+    
+    
 
 }
 

@@ -7,9 +7,13 @@ public class GroundSensor : MonoBehaviour
     [Header("Static Ground")]
   private Rigidbody2D _rigidBody;
  
-  [Header("Oshkarsh Jump")]
+  [Header("Oskar Jump")]
   public bool isGrounded;
   public float jumpForce = 12;
+  public bool canDobleJump = true;
+  private BoxCollider2D boxCollider2D;
+  public GroundSensor groundSensor;
+
 
 
 
@@ -19,15 +23,18 @@ public class GroundSensor : MonoBehaviour
   void Awake()
   {
     _rigidBody = GetComponentInParent<Rigidbody2D>();
+    boxCollider2D = GetComponent<BoxCollider2D>();
 
 
   }
+
    
   void OnTriggerEnter2D(Collider2D collider)
   {
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
+      canDobleJump = true;
     }
   }
 
@@ -47,6 +54,9 @@ public class GroundSensor : MonoBehaviour
     {
       isGrounded = false;
     }
-  } 
+  }
+
+
+  
 
 }

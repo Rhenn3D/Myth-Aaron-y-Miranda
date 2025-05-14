@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class Platforms : MonoBehaviour
 
-    public bool IsPlaying = true;
+{
+    private Animator animator;
+    private BoxCollider2D boxCollider2D;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     void Start()
     {
         
@@ -17,4 +23,5 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    
 }
