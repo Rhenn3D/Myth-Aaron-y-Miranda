@@ -25,6 +25,15 @@ public class Oskar : MonoBehaviour
   private Transform particlesTransform;
   private Vector3 particlesPosition;
 private GameManager gameManager;
+    private SpriteRenderer spriteRenderer;
+
+    private float attackDamage = 5f;
+    private float attackRadius = 0.5f;
+    public Transform hitBoxPosition;
+    private LayerMask enemyLayer;
+    private float attackCooldown = 1.5f;
+    private AudioClip attackSFX;
+    AudioSource _SFXSource;
 
     void Awake()
     {
@@ -37,6 +46,8 @@ private GameManager gameManager;
         particleSystemm = GetComponentInChildren<ParticleSystem>();
         particlesTransform = particleSystemm.transform;
         particlesPosition = particlesTransform.localPosition;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         
 
     }
@@ -52,6 +63,11 @@ private GameManager gameManager;
         {
             return;
         }
+        if(gameManager.isPaused)
+        {
+            return;
+        }
+       
         
         if(Input.GetButtonDown("Jump"))
         {
@@ -126,12 +142,37 @@ private GameManager gameManager;
         _alredyPlaying = false;
         }
     }
+
     
-    void Death()
+    public void Death()
     {
+        spriteRenderer.enabled = false;
         gameManager.IsPlaying = false;
+        boxcollider2D.enabled = false;
+        _rigidBody.velocity = Vector2.zero;
+        inputHorizontal = 0;
+        SceneManager.LoadScene(1);     
     }
     
+    void NormalAtack()
+    {
+        _animator.SetTrigger("Attack");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(hitBoxPosition.position, attackRadius, enemyLayer);
+        _SFXSource.PlayOneShot(attackSFX);
+        Debug.Log("Attack");
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Phetonisio enemyScript = enemy.GetComponent<Phetonisio>();
+            enemyScript.TakeDamage(attackDamage);
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(hitBoxPosition.position, attackRadius);
+    }
 
 }
 

@@ -18,6 +18,8 @@ public class Phetonisio : MonoBehaviour
     private GameManager gameManager;
 
     private BoxCollider2D boxCollider;
+    public float inputHorizontal;
+    public SpriteRenderer spriteRenderer;
     
     void Awake()
     {
@@ -27,12 +29,13 @@ public class Phetonisio : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         healthBar = GetComponentInChildren<Slider>();
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         
     }
 
     void Start()
     {
-        speed = 0;
+        speed = 2;
         currentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
@@ -43,6 +46,8 @@ public class Phetonisio : MonoBehaviour
         rigidBody.velocity = new Vector2(direction * speed, rigidBody.velocity.y);
     }
 
+
+ 
     public void Death()
     {
         
@@ -66,9 +71,10 @@ public class Phetonisio : MonoBehaviour
         }
     }
 
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6 || collision.gameObject.layer == 9)
+        if(collision.gameObject.layer == 9)
         {
             direction *= -1;
         }
@@ -82,5 +88,22 @@ public class Phetonisio : MonoBehaviour
         
     }
 
+void Movement()
+    {
+        rigidBody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rigidBody.velocity.y);
+
+        if(inputHorizontal > 0)
+            {
+	        transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        else if(inputHorizontal < 0)
+            {
+	        transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            
+
+
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
+    }
 }
 

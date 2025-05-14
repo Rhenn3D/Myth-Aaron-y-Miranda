@@ -13,6 +13,11 @@ public class GroundSensor : MonoBehaviour
   public bool canDobleJump = true;
   private BoxCollider2D boxCollider2D;
   public GroundSensor groundSensor;
+  public Oskar oskar;
+  public Platforms platform;
+  private Animator animator;
+  public static readonly int IsUp = Animator.StringToHash("IsUp");
+
 
 
 
@@ -24,7 +29,10 @@ public class GroundSensor : MonoBehaviour
   {
     _rigidBody = GetComponentInParent<Rigidbody2D>();
     boxCollider2D = GetComponent<BoxCollider2D>();
-
+    oskar = GetComponentInParent<Oskar>();
+    platform = GetComponentInParent<Platforms>();
+    groundSensor = GetComponentInChildren<GroundSensor>();  
+    animator = GetComponentInParent<Animator>();
 
   }
 
@@ -36,7 +44,19 @@ public class GroundSensor : MonoBehaviour
       isGrounded = true;
       canDobleJump = true;
     }
+
+    if(collider.gameObject.layer == 8)
+    {
+      oskar.Death();
+    }
+    if(gameObject.CompareTag("Nubecita"))
+    {
+      
+      animator.SetBool(IsUp, true);
+      platform.IsUp = true;
+    }
   }
+
 
 
   void OnTriggerStay2D(Collider2D collider)
