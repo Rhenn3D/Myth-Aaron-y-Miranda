@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Oskar : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class Oskar : MonoBehaviour
   private ParticleSystem particleSystemm;
   private Transform particlesTransform;
   private Vector3 particlesPosition;
+private GameManager gameManager;
 
     void Awake()
     {
@@ -45,6 +48,11 @@ public class Oskar : MonoBehaviour
 
     void Update()
     {
+        if(!gameManager.IsPlaying)
+        {
+            return;
+        }
+        
         if(Input.GetButtonDown("Jump"))
         {
             if(groundSensor.isGrounded || groundSensor.canDobleJump)
@@ -55,6 +63,8 @@ public class Oskar : MonoBehaviour
         PlayerStepsSounds();
 
         _animator.SetBool("IsJumping", !groundSensor.isGrounded);
+        
+        
     }
 
     void FixedUpdate()
@@ -117,6 +127,10 @@ public class Oskar : MonoBehaviour
         }
     }
     
+    void Death()
+    {
+        gameManager.IsPlaying = false;
+    }
     
 
 }
