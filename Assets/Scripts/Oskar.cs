@@ -39,6 +39,23 @@ private GameManager gameManager;
     private bool canDash = true;
     private bool isDashing = false; 
 
+
+
+    public float wallJumpForceX = 8f;
+    public float wallJumpForceY = 12f;
+
+    public Transform wallCheck;
+    public LayerMask groundLayer;
+    public float checkRadius = 0.2f;
+
+    [Header("Wall Sliding")]
+    public float wallSlideSpeed = 2f;
+    private bool isWallSliding;
+
+    private bool isTouchingWall;
+    private bool canWallJump;
+    
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -78,11 +95,34 @@ private GameManager gameManager;
             return;
         }
 
+        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, checkRadius, groundLayer);
+
+        if (isTouchingWall && !groundSensor.isGrounded && inputHorizontal != 0)
+        {
+            isWallSliding = true;
+            canWallJump = true; // Se habilita el wall jump al tocar la pared
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+
+        if (isWallSliding)
+        {
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, -wallSlideSpeed);
+        }
+
         if(Input.GetButtonDown("Jump"))
         {
             if(groundSensor.isGrounded || groundSensor.canDobleJump)
             {
                Jump(); 
+            }
+            else if (isWallSliding && canWallJump)
+            {
+                _rigidBody.AddForce(Vector2.up * wallJumpForceY, ForceMode2D.Impulse);
+                canWallJump = false; // Solo permite un salto hasta volver a tocar la pared
+                //Flip();
             }
         }
         PlayerStepsSounds();
@@ -137,16 +177,16 @@ private GameManager gameManager;
         inputHorizontal = Input.GetAxisRaw("Horizontal");
     }
     void Jump()
+    {
+        if(!groundSensor.isGrounded)
         {
-            if(!groundSensor.isGrounded)
-            {
-                groundSensor.canDobleJump = false;
-                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
-            }
-        
-            _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            jumpSound.PlayOneShot(jumpSFX);
+            groundSensor.canDobleJump = false;
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
         }
+        
+        _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        jumpSound.PlayOneShot(jumpSFX);
+    }
 
     void PlayerStepsSounds()
     {
@@ -202,6 +242,9 @@ private GameManager gameManager;
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitBoxPosition.position, attackRadius);
+
+        if (wallCheck != null)
+            Gizmos.DrawWireSphere(wallCheck.position, checkRadius);
     }
 
     IEnumerator Dash()
@@ -221,6 +264,8 @@ private GameManager gameManager;
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
+
+    
 
 }
 
