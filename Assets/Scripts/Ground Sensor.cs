@@ -41,16 +41,8 @@ public class GroundSensor : MonoBehaviour
     {
       oskar.Death();
     }
-    if(gameObject.CompareTag("Nubecita"))
-    {
-      animator.SetBool("IsUp", true);
-      
-    }
-    else
-    {
-      animator.SetBool("IsUp", false);
-    }
-  }
+    
+  } 
 
 
 

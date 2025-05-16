@@ -32,7 +32,12 @@ private GameManager gameManager;
     public Transform hitBoxPosition;
     public LayerMask enemyLayer;
     public AudioClip attackSFX;
-    AudioSource _SFXSource;
+    private AudioSource _SFXSource;
+    public float dashForce = 20;
+    public float dashDuration = 0.5f;
+    public float dashCoolDown;
+    private bool canDash = true;
+    private bool isDashing = false; 
 
     void Awake()
     {
@@ -68,7 +73,11 @@ private GameManager gameManager;
             return;
         }
        
-        
+        if (isDashing)
+        {
+            return;
+        }
+
         if(Input.GetButtonDown("Jump"))
         {
             if(groundSensor.isGrounded || groundSensor.canDobleJump)
@@ -84,10 +93,25 @@ private GameManager gameManager;
         {
             NormalAttack();
         }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+        
+       
     }
 
     void FixedUpdate()
     {
+        
+
+        if(isDashing)
+        {
+            return;
+        }
+        
         Movement();
     }
 
@@ -178,6 +202,24 @@ private GameManager gameManager;
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitBoxPosition.position, attackRadius);
+    }
+
+    IEnumerator Dash()
+    {
+        float gravity = _rigidBody.gravityScale;
+        _rigidBody.gravityScale = 0;
+        _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
+
+        isDashing = true;
+        canDash = false;
+        _rigidBody.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(dashDuration);
+        _rigidBody.gravityScale = gravity;
+        isDashing = false;
+        
+        yield return new WaitForSeconds(dashCoolDown);
+        canDash = true;
     }
 
 }
