@@ -30,9 +30,8 @@ private GameManager gameManager;
     private float attackDamage = 5f;
     private float attackRadius = 0.5f;
     public Transform hitBoxPosition;
-    private LayerMask enemyLayer;
-    private float attackCooldown = 1.5f;
-    private AudioClip attackSFX;
+    public LayerMask enemyLayer;
+    public AudioClip attackSFX;
     AudioSource _SFXSource;
 
     void Awake()
@@ -48,6 +47,7 @@ private GameManager gameManager;
         particlesPosition = particlesTransform.localPosition;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _SFXSource = GetComponent<AudioSource>();
         
 
     }
@@ -80,7 +80,10 @@ private GameManager gameManager;
 
         _animator.SetBool("IsJumping", !groundSensor.isGrounded);
         
-        
+        if(Input.GetButtonDown("Fire1"))
+        {
+            NormalAttack();
+        }
     }
 
     void FixedUpdate()
@@ -154,17 +157,20 @@ private GameManager gameManager;
         SceneManager.LoadScene(1);     
     }
     
-    void NormalAtack()
+    void NormalAttack()
     {
+        Debug.Log("Attack");
         _animator.SetTrigger("Attack");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(hitBoxPosition.position, attackRadius, enemyLayer);
         _SFXSource.PlayOneShot(attackSFX);
-        Debug.Log("Attack");
+        
+       
 
         foreach(Collider2D enemy in hitEnemies)
         {
             Phetonisio enemyScript = enemy.GetComponent<Phetonisio>();
             enemyScript.TakeDamage(attackDamage);
+            
         }
     }
 

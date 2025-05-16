@@ -14,23 +14,15 @@ public class GroundSensor : MonoBehaviour
   private BoxCollider2D boxCollider2D;
   public GroundSensor groundSensor;
   public Oskar oskar;
-  public Platforms platform;
   private Animator animator;
-  public static readonly int IsUp = Animator.StringToHash("IsUp");
-
-
-
-
-
-
-
+  private bool platform;
+  private bool IsUp; 
 
   void Awake()
   {
     _rigidBody = GetComponentInParent<Rigidbody2D>();
     boxCollider2D = GetComponent<BoxCollider2D>();
     oskar = GetComponentInParent<Oskar>();
-    platform = GetComponentInParent<Platforms>();
     groundSensor = GetComponentInChildren<GroundSensor>();  
     animator = GetComponentInParent<Animator>();
 
@@ -51,9 +43,12 @@ public class GroundSensor : MonoBehaviour
     }
     if(gameObject.CompareTag("Nubecita"))
     {
+      animator.SetBool("IsUp", true);
       
-      animator.SetBool(IsUp, true);
-      platform.IsUp = true;
+    }
+    else
+    {
+      animator.SetBool("IsUp", false);
     }
   }
 

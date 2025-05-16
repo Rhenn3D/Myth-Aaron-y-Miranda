@@ -8,7 +8,7 @@ public class Phetonisio : MonoBehaviour
 
     private Animator animator;
     private AudioSource audioSource;
-    private Slider healthBar;
+
     public AudioClip phetonisiodeathSFX;
     private Rigidbody2D rigidBody;
     public int direction = -1;
@@ -16,7 +16,6 @@ public class Phetonisio : MonoBehaviour
     public float maxHealth = 5;
     private float currentHealth;
     private GameManager gameManager;
-
     private BoxCollider2D boxCollider;
     public float inputHorizontal;
     public SpriteRenderer spriteRenderer;
@@ -27,7 +26,6 @@ public class Phetonisio : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        healthBar = GetComponentInChildren<Slider>();
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
@@ -37,8 +35,6 @@ public class Phetonisio : MonoBehaviour
     {
         speed = 2;
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
     }
 
     void FixedUpdate()
@@ -50,23 +46,27 @@ public class Phetonisio : MonoBehaviour
  
     public void Death()
     {
-        
+        Debug.Log("Auu");
         audioSource.PlayOneShot(phetonisiodeathSFX);
+        
         direction = 0;
+         
         rigidBody.gravityScale = 0;
-        animator.SetTrigger("IsDead");
+       
         boxCollider.enabled = false;
-        Destroy(gameObject, phetonisiodeathSFX.length);
+        
+        Destroy(gameObject);
        
         
     }
 
     public void TakeDamage(float damage)
     {
-        currentHealth-= damage;
-        healthBar.value = currentHealth;
+        currentHealth -= damage;
+        
         if(currentHealth <= 0)
         {
+            
             Death();
         }
     }

@@ -7,9 +7,9 @@ public class Platforms : MonoBehaviour
 {
     public Animator animator;
     private BoxCollider2D boxCollider2D;
-private SpriteRenderer spriteRenderer;
-public GroundSensor groundSensor;
-public bool IsUp;
+    private SpriteRenderer spriteRenderer;
+    public GroundSensor groundSensor;
+    public bool IsUp;
 
     // Start is called before the first frame update
 

@@ -17,7 +17,6 @@ public class Coin : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
         coinrenderer = GetComponent<SpriteRenderer>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
     }
     void Start()
