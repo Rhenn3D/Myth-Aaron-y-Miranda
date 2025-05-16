@@ -10,10 +10,14 @@ public class CameraMovement : MonoBehaviour
 
     public Vector2 minPosition;
     public float interpolationRatio = 0.05f;
+    private AudioSource audioSource;
+    public AudioClip BGM;
 
     void Awake()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+        audioSource = GetComponent<AudioSource>();
+        BGM = GetComponent<AudioClip>();
     }
      void FixedUpdate()
     {
