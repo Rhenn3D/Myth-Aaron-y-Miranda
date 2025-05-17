@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d255f89a1200851429428dd34767cc7b
+guid: c1d28a5feeb813a41b91111935085a19
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 252
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,148 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dash_1
+      name: Barra vida 1_0
       rect:
         serializedVersion: 2
-        x: 192
-        y: 1484
-        width: 529
-        height: 372
-      alignment: 9
-      pivot: {x: 0.48199156, y: 0.9216466}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a349e4a47558da848a2f32d874405924
-      internalID: 1689761394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dash_2
-      rect:
-        serializedVersion: 2
-        x: 781
-        y: 1482
-        width: 704
-        height: 376
-      alignment: 9
-      pivot: {x: 0.54003406, y: 0.8702776}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 38ebe0d26ca716f42853bf88b0dc8733
-      internalID: -280248536
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dash_8
-      rect:
-        serializedVersion: 2
-        x: 399
-        y: 952
-        width: 527
-        height: 372
-      alignment: 9
-      pivot: {x: 0.49609584, y: 0.8926946}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a211cf55f8a7b543902deaedd80ed2e
-      internalID: -442749445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dash_11
-      rect:
-        serializedVersion: 2
-        x: 1100
-        y: 972
-        width: 389
-        height: 330
-      alignment: 9
-      pivot: {x: 0.22447476, y: 0.81058204}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18903a524d579514cbf3437ccfc77cb0
-      internalID: -1494347879
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dash_13
-      rect:
-        serializedVersion: 2
-        x: 1715
-        y: 983
-        width: 294
-        height: 330
-      alignment: 9
-      pivot: {x: 0.17222543, y: 0.8304469}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 453dc9acfc210774b85308f93ff77d16
-      internalID: -1722064185
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dash_32
-      rect:
-        serializedVersion: 2
-        x: 1992
-        y: 977
-        width: 7
-        height: 10
+        x: 47
+        y: 88
+        width: 166
+        height: 5
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c8e5f7fd3c2589459252817f1db936c
-      internalID: -595504864
+      spriteID: 7ab547514d9226d45bb962a41d2cef4d
+      internalID: 285996687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dash_33
+      name: Barra vida 1_1
       rect:
         serializedVersion: 2
-        x: 585
-        y: 443
-        width: 224
-        height: 330
-      alignment: 9
-      pivot: {x: 0.061924797, y: 0.8476718}
+        x: 47
+        y: 74
+        width: 166
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c1df59fb0a8e16429b5903cd2ef15bc
-      internalID: 884818557
+      spriteID: 4e9e1a32ff01cf34399ea3bd080ce32b
+      internalID: 284013260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barra vida 1_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 62
+        width: 166
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5016b41f6f328e84ea5c0439d0298010
+      internalID: -1745406420
       vertices: []
       indices: 
       edges: []
@@ -267,46 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dash_0: 304782548
-      Dash_1: 1689761394
-      Dash_10: 1187914232
-      Dash_11: -1494347879
-      Dash_12: -1623618484
-      Dash_13: -1722064185
-      Dash_14: -934182808
-      Dash_15: 422374998
-      Dash_16: -236077643
-      Dash_17: -925664306
-      Dash_18: 213529710
-      Dash_19: 1534601800
-      Dash_2: -280248536
-      Dash_20: 1042936481
-      Dash_21: 848093132
-      Dash_22: 1614136799
-      Dash_23: -524238717
-      Dash_24: -1862683166
-      Dash_25: 333010637
-      Dash_26: -1031799462
-      Dash_27: 76596983
-      Dash_28: -702200709
-      Dash_29: -747057853
-      Dash_3: 369182613
-      Dash_30: -1204102920
-      Dash_31: -1239966056
-      Dash_32: -595504864
-      Dash_33: 884818557
-      Dash_34: 1718026799
-      Dash_35: 572281446
-      Dash_36: 23521611
-      Dash_37: 433295310
-      Dash_38: -1076442898
-      Dash_39: -596336218
-      Dash_4: -32821103
-      Dash_5: -2002740185
-      Dash_6: -1193778181
-      Dash_7: 810480407
-      Dash_8: -442749445
-      Dash_9: 1052126492
+      Barra vida 1_0: 285996687
+      Barra vida 1_1: 284013260
+      Barra vida 1_2: -1745406420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
