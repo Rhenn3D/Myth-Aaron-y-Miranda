@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5968092616157308937}
   - component: {fileID: 1418001890144086408}
   - component: {fileID: 949487708108538822}
+  - component: {fileID: -5466014558282327572}
   m_Layer: 3
   m_Name: Nubes plataforma_0
   m_TagString: Nubecita
@@ -172,3 +173,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5466014558282327572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494953300006177493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cef69ddaf5842b47aab0a9768488334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoAntesDeDesaparecer: 0.56
+  tiempoParpadeo: 0.4
+  tiempoInactiva: 3
+  spriteNormal: {fileID: -1234414817, guid: c2852fc47b27c844eb1b8af73b7a1e41, type: 3}
+  spriteCuandoPisa: {fileID: 1009100180, guid: c2852fc47b27c844eb1b8af73b7a1e41, type: 3}
