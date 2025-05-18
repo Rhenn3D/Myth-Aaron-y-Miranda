@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OskarController : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class OskarController : MonoBehaviour
     public GameObject prefabPatata; // Prefab de la patata para lanzar
     public Transform puntoLanzamiento; // Punto desde donde se lanza la patata
     public float fuerzaLanzamiento = 10f;
+    public Text patatasCountText;
 
 
 
@@ -109,6 +111,8 @@ public class OskarController : MonoBehaviour
         wallJumpDirection.Normalize();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        UpdatePatatasUI();
+
     }
 
     void Update()
@@ -147,7 +151,7 @@ public class OskarController : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        if (Input.GetMouseButtonDown(1)) // Botón derecho
+        if (Input.GetMouseButtonDown(1)) // Botón derecho del ratón
         {
             LanzarPatata();
         }
@@ -379,31 +383,35 @@ public class OskarController : MonoBehaviour
         spriteRenderer.enabled = true; // Asegura que quede visible
         isInvulnerable = false;
     }
-    void LanzarPatata()
+
+    public void recogerPatata()
     {
-        if (cantidadPatatas > 0 && prefabPatata != null && puntoLanzamiento != null)
+        cantidadPatatas++;
+        ActualizarUI();
+    }
+    public void LanzarPatata()
+    {
+        if (cantidadPatatas > 0)
         {
-            // Instanciar la patata
-            GameObject patataInstanciada = Instantiate(prefabPatata, puntoLanzamiento.position, Quaternion.identity);
+            GameObject patata = Instantiate(prefabPatata, puntoLanzamiento.position, Quaternion.identity);
+            Rigidbody2D rb = patata.GetComponent<Rigidbody2D>();
+            float direccion = transform.localScale.x; // para que lance hacia la dirección que mira el personaje
+            rb.velocity = new Vector2(10f * direccion, 0); // velocidad horizontal
 
-            // Obtener Rigidbody2D para aplicarle fuerza
-            Rigidbody2D rbPatata = patataInstanciada.GetComponent<Rigidbody2D>();
-
-            if (rbPatata != null)
-            {
-                // Lanzar en la dirección que mira el jugador
-                Vector2 direccionLanzamiento = facingDirection == 1 ? Vector2.right : Vector2.left;
-
-                rbPatata.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode2D.Impulse);
-            }
-
-            // Restar una patata
-            cantidadPatatas--;
+            cantidadPatatas--; // ↓↓↓↓↓ Asegúrate de tener esta línea
+            ActualizarUI();    // y esta para que el número se actualice en el HUD
         }
-        else
+    }
+    void UpdatePatatasUI()
+    {
+        if (patatasCountText != null)
+            patatasCountText.text = "Patatas: " + cantidadPatatas.ToString();
+    }
+    void ActualizarUI()
+    {
+        if (patatasCountText != null)
         {
-            // Aquí podrías poner un feedback de que no tienes patatas para lanzar
-            Debug.Log("No tienes patatas para lanzar!");
+            patatasCountText.text = "x " + cantidadPatatas.ToString();
         }
     }
 }

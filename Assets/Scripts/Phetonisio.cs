@@ -71,15 +71,18 @@ public class Phetonisio : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (isDead) return; // No hacer nada si está muerto
+
         if (other.CompareTag("Player"))
         {
             OskarController player = other.GetComponent<OskarController>();
             if (player != null)
             {
-                player.TakeDamage(1, transform);
+                player.TakeDamage(1, transform); // Aquí está el empuje y daño
             }
         }
     }
+
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player")) TryDamagePlayer(other);
@@ -87,7 +90,7 @@ public class Phetonisio : MonoBehaviour
 
     void TryDamagePlayer(Collider2D other)
     {
-        if (isDead) return;  // No hace daño si está muriendo
+        if (isDead) return;
 
         if (Time.time >= lastHitTime + damageCooldown)
         {
@@ -102,7 +105,7 @@ public class Phetonisio : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (isDead) return; // Si ya está muerto, no sigue restando salud ni nada
+        if (isDead) return;
 
         currentHealth -= amount;
         if (currentHealth <= 0)
@@ -111,6 +114,7 @@ public class Phetonisio : MonoBehaviour
             Die();
         }
     }
+
 
     void Die()
     {

@@ -86,16 +86,14 @@ public class Cofre : MonoBehaviour
         if (sonidoApertura != null)
             sonidoApertura.Play();
 
-        // Aquí aumentamos las patatas del jugador
-        if (player != null)
+        // Aquí llamamos a recogerPatata() en el jugador:
+        GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+        if (jugador != null)
         {
-            OskarController oskar = player.GetComponent<OskarController>();
+            OskarController oskar = jugador.GetComponent<OskarController>();
             if (oskar != null)
             {
-                oskar.cantidadPatatas++;  // Suma 1 patata al jugador
-                oskar.cantidadPatatas++;  // Suma 1 patata al jugador
-                oskar.cantidadPatatas++;  // Suma 1 patata al jugador
-                Debug.Log("Patata recogida. Total: " + oskar.cantidadPatatas);
+                oskar.recogerPatata();  // <-- Aquí es donde incrementas el contador
             }
         }
     }
