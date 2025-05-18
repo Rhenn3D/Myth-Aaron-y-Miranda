@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8f3c4d6359a206042a24dd702b35cd5e
+guid: 92bb02bf6bf4cdd458bed63cec409c94
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 40.1
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,64 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: agarre_0
+      name: Cofre_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 173
-        width: 53
-        height: 65
-      alignment: 9
-      pivot: {x: 0.32921046, y: 0.80775756}
+        x: 29
+        y: 192
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10efcb1f4f6298644ba81cae14cd1629
-      internalID: 137324572
+      spriteID: 8407ed6b9a8c02a48882bec15b5654d2
+      internalID: -883024268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: agarre_1
+      name: Cofre_1
       rect:
         serializedVersion: 2
-        x: 85
-        y: 172
-        width: 54
-        height: 71
-      alignment: 9
-      pivot: {x: 0.33085617, y: 0.73705304}
+        x: 96
+        y: 192
+        width: 40
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72d2c0c2cac47024b984c20b0b51f0e8
-      internalID: 576889728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: agarre_2
-      rect:
-        serializedVersion: 2
-        x: 151
-        y: 170
-        width: 56
-        height: 72
-      alignment: 9
-      pivot: {x: 0.32010078, y: 0.7288439}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ded650a046a215f4fb62bcf5a912a8dc
-      internalID: 428320548
+      spriteID: 2da827df27228f048acdc15ba1e0f720
+      internalID: 1233820938
       vertices: []
       indices: 
       edges: []
@@ -183,9 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      agarre_0: 137324572
-      agarre_1: 576889728
-      agarre_2: 428320548
+      Cofre_0: -883024268
+      Cofre_1: 1233820938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
