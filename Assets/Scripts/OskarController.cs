@@ -8,7 +8,7 @@ public class OskarController : MonoBehaviour
     public float moveSpeed = 8f;
     public float jumpForce = 12f;
 
-    
+
 
 
     [Header("Salto Variable")]
@@ -67,23 +67,40 @@ public class OskarController : MonoBehaviour
     private float nextAttackTime = 0f;
     private bool isFacingRight = true;
 
+
+    [Header("Daño e Invulnerabilidad")]
+    public float knockbackForce = 10f;
+    public float knockbackDuration = 0.2f;
+    public AudioClip hurtSound;
+    public float invulnerabilidadDuracion = 1f;
+    private bool isKnockedBack = false;
+    private bool isInvulnerable = false;
+
+    [Header("Patatas")]
+    public int cantidadPatatas = 0; // Cantidad actual de patatas
+    public GameObject prefabPatata; // Prefab de la patata para lanzar
+    public Transform puntoLanzamiento; // Punto desde donde se lanza la patata
+    public float fuerzaLanzamiento = 10f;
+
+
+
     [Header("Sonidos")]
     public AudioSource audioSource;
     public AudioSource footstepSource;
     public AudioClip footstepClip;
     private bool footstepClipPlaying = false;
     public AudioClip jumpSound;
-    
+
     public AudioClip dashSound;
-    
+
     public AudioClip attackSound;
-   
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 
     void Start()
     {
@@ -95,129 +112,137 @@ public class OskarController : MonoBehaviour
     }
 
     void Update()
-{
-    moveInput = Input.GetAxisRaw("Horizontal");
-    animator.SetFloat("Speed", Mathf.Abs(moveInput));
-
-    // Flip del personaje y attackPoint
-    if (moveInput != 0 && !isWallJumping)
     {
-        if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
+        moveInput = Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+        // Flip del personaje y attackPoint
+        if (moveInput != 0 && !isWallJumping)
         {
-            Flip();
+            if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
+            {
+                Flip();
+            }
         }
-    }
 
-    // Sonido pasos
-    if (isGrounded && moveInput != 0 && !footstepClipPlaying)
-    {
-        footstepClipPlaying = true;
-        footstepSource.clip = footstepClip;
-        footstepSource.Play();
-    }
-    else if ((!isGrounded || moveInput == 0) && footstepClipPlaying)
-    {
-        footstepClipPlaying = false;
-        footstepSource.Stop();
-    }
-
-    // Ataque
-    if (Time.time >= nextAttackTime)
-    {
-        if (Input.GetMouseButtonDown(0)) // Click izquierdo
+        // Sonido pasos
+        if (isGrounded && moveInput != 0 && !footstepClipPlaying)
         {
-            Attack();
-            nextAttackTime = Time.time + 1f / attackRate;
+            footstepClipPlaying = true;
+            footstepSource.clip = footstepClip;
+            footstepSource.Play();
         }
-    }
-
-    // Chequeos de suelo y pared
-    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    Vector2 wallCheckPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
-    isTouchingWall = Physics2D.OverlapCircle(wallCheckPos, wallCheckRadius, wallLayer);
-
-    if (isGrounded)
-    {
-        jumpCount = maxJumps;
-    }
-
-    isWallSliding = isTouchingWall && !isGrounded && moveInput != 0 && !isWallJumping && !isDashing;
-
-    if (isWallSliding)
-    {
-        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
-    }
-
-    // Saltos
-    if (Input.GetButtonDown("Jump"))
-    {
-        animator.SetBool("isJumping", true);
-        if (isGrounded || (jumpCount > 0 && !isWallSliding))
+        else if ((!isGrounded || moveInput == 0) && footstepClipPlaying)
         {
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
-            audioSource.PlayOneShot(jumpSound);
-
-            rb.velocity = new Vector2(rb.velocity.x, 0f); // Reinicia velocidad en Y
-            rb.velocity += Vector2.up * jumpForce;
-
-            jumpCount--;
+            footstepClipPlaying = false;
+            footstepSource.Stop();
         }
-        else if (isWallSliding)
+
+        // Ataque
+        if (Time.time >= nextAttackTime)
         {
-            isWallJumping = true;
-            wallJumpTime = Time.time + wallJumpDuration;
+            if (Input.GetMouseButtonDown(0)) // Click izquierdo
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+        if (Input.GetMouseButtonDown(1)) // Botón derecho
+        {
+            LanzarPatata();
+        }
 
-            rb.velocity = new Vector2(-facingDirection * wallJumpForce * wallJumpDirection.x,
-                                       wallJumpForce * wallJumpDirection.y);
 
-            // Ya no uses spriteRenderer.flipX aquí
-            // spriteRenderer.flipX = facingDirection > 0;
+        // Chequeos de suelo y pared
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        Vector2 wallCheckPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
+        isTouchingWall = Physics2D.OverlapCircle(wallCheckPos, wallCheckRadius, wallLayer);
+
+        if (isGrounded)
+        {
             jumpCount = maxJumps;
         }
-    }
 
-    if (Input.GetButton("Jump") && isJumping && !isDashing)
-    {
-        if (jumpTimeCounter > 0)
+        isWallSliding = isTouchingWall && !isGrounded && moveInput != 0 && !isWallJumping && !isDashing;
+
+        if (isWallSliding)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * jumpForceMultiplier);
-            jumpTimeCounter -= Time.deltaTime;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
         }
-        else
+
+        // Saltos
+        if (Input.GetButtonDown("Jump"))
+        {
+            animator.SetBool("isJumping", true);
+            if (isGrounded || (jumpCount > 0 && !isWallSliding))
+            {
+                isJumping = true;
+                jumpTimeCounter = jumpTime;
+                audioSource.PlayOneShot(jumpSound);
+
+                rb.velocity = new Vector2(rb.velocity.x, 0f); // Reinicia velocidad en Y
+                rb.velocity += Vector2.up * jumpForce;
+
+                jumpCount--;
+            }
+            else if (isWallSliding)
+            {
+                isWallJumping = true;
+                wallJumpTime = Time.time + wallJumpDuration;
+
+                rb.velocity = new Vector2(-facingDirection * wallJumpForce * wallJumpDirection.x,
+                                           wallJumpForce * wallJumpDirection.y);
+
+                // Ya no uses spriteRenderer.flipX aquí
+                // spriteRenderer.flipX = facingDirection > 0;
+                jumpCount = maxJumps;
+            }
+        }
+
+        if (Input.GetButton("Jump") && isJumping && !isDashing)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce * jumpForceMultiplier);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
+        if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
+            animator.SetTrigger("Jump");    // Al iniciar salto
         }
+
+        if (Time.time > wallJumpTime)
+        {
+            isWallJumping = false;
+        }
+
+        // Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(PerformDash());
+            audioSource.PlayOneShot(dashSound);
+        }
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+        // Animaciones booleanas
+        animator.SetBool("isJumping", !isGrounded && !isWallSliding);
+        animator.SetBool("isWallSliding", isWallSliding);
+        animator.SetBool("isDashing", isDashing);
     }
 
-    if (Input.GetButtonUp("Jump"))
-    {
-        isJumping = false;
-        animator.SetTrigger("Jump");    // Al iniciar salto
-    }
-
-    if (Time.time > wallJumpTime)
-    {
-        isWallJumping = false;
-    }
-
-    // Dash
-    if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= lastDashTime + dashCooldown)
-    {
-        StartCoroutine(PerformDash());
-        audioSource.PlayOneShot(dashSound);
-    }
-
-    animator.SetFloat("Speed", Mathf.Abs(moveInput));
-
-    // Animaciones booleanas
-    animator.SetBool("isJumping", !isGrounded && !isWallSliding);
-    animator.SetBool("isWallSliding", isWallSliding);
-    animator.SetBool("isDashing", isDashing);
-}
 
     void FixedUpdate()
     {
+        if (isKnockedBack) return;
+
         if (!isWallJumping && !isWallSliding && !isDashing)
         {
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
@@ -293,7 +318,7 @@ public class OskarController : MonoBehaviour
             if (enemyScript != null)
             {
                 enemyScript.TakeDamage(attackDamage);
-                
+
             }
         }
     }
@@ -307,5 +332,78 @@ public class OskarController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
 
+    }
+
+    public void TakeDamage(int damage, Transform source)
+    {
+        if (isInvulnerable) return;
+
+        // Reproducir sonido de daño
+        audioSource.PlayOneShot(hurtSound);
+
+        // Calcular dirección de retroceso
+        Vector2 knockbackDir = (transform.position - source.position).normalized;
+        StartCoroutine(ApplyKnockback(knockbackDir));
+        StartCoroutine(Invulnerabilidad());
+    }
+
+
+    private IEnumerator ApplyKnockback(Vector2 direction)
+    {
+        isKnockedBack = true;
+        float timer = 0f;
+
+        while (timer < knockbackDuration)
+        {
+            rb.velocity = new Vector2(direction.x * knockbackForce, direction.y * knockbackForce * 0.5f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isKnockedBack = false;
+    }
+
+    private IEnumerator Invulnerabilidad()
+    {
+        isInvulnerable = true;
+        float tiempo = 0f;
+        float intervalo = 0.1f;
+
+        while (tiempo < invulnerabilidadDuracion)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+            yield return new WaitForSeconds(intervalo);
+            tiempo += intervalo;
+        }
+
+        spriteRenderer.enabled = true; // Asegura que quede visible
+        isInvulnerable = false;
+    }
+    void LanzarPatata()
+    {
+        if (cantidadPatatas > 0 && prefabPatata != null && puntoLanzamiento != null)
+        {
+            // Instanciar la patata
+            GameObject patataInstanciada = Instantiate(prefabPatata, puntoLanzamiento.position, Quaternion.identity);
+
+            // Obtener Rigidbody2D para aplicarle fuerza
+            Rigidbody2D rbPatata = patataInstanciada.GetComponent<Rigidbody2D>();
+
+            if (rbPatata != null)
+            {
+                // Lanzar en la dirección que mira el jugador
+                Vector2 direccionLanzamiento = facingDirection == 1 ? Vector2.right : Vector2.left;
+
+                rbPatata.AddForce(direccionLanzamiento * fuerzaLanzamiento, ForceMode2D.Impulse);
+            }
+
+            // Restar una patata
+            cantidadPatatas--;
+        }
+        else
+        {
+            // Aquí podrías poner un feedback de que no tienes patatas para lanzar
+            Debug.Log("No tienes patatas para lanzar!");
+        }
     }
 }

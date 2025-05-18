@@ -30,7 +30,7 @@ public class Phetonisio : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth; 
     }
 
     void Update()
@@ -61,9 +61,15 @@ public class Phetonisio : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) TryDamagePlayer(other);
+        if (other.CompareTag("Player"))
+        {
+            OskarController player = other.GetComponent<OskarController>();
+            if (player != null)
+            {
+                player.TakeDamage(1, transform);
+            }
+        }
     }
-
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player")) TryDamagePlayer(other);
