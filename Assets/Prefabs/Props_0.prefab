@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149354632304347882}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.37, y: -0.22, z: -0.073278286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bb1218d7122a84da660d0ddd86c5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinSFX: {fileID: 8300000, guid: 3a0b1f8d57ca5254494955f61a701e8f, type: 3}
+  CoinSFX: {fileID: 8300000, guid: 150cb7d09b64e464fb64944a21502603, type: 3}
   particlerender: {fileID: 6921724175054110209}
 --- !u!82 &6310175398370354105
 AudioSource:

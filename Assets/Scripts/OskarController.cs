@@ -8,6 +8,9 @@ public class OskarController : MonoBehaviour
     public float moveSpeed = 8f;
     public float jumpForce = 12f;
 
+    
+
+
     [Header("Salto Variable")]
     public float jumpTime = 0.25f;
     public float jumpForceMultiplier = 1f;
@@ -62,6 +65,22 @@ public class OskarController : MonoBehaviour
     public LayerMask enemyLayers;
     public float attackRate = 2f;
     private float nextAttackTime = 0f;
+    private bool isFacingRight = true;
+
+    [Header("Sonidos")]
+    public AudioSource audioSource;
+    public AudioSource footstepSource;
+    public AudioClip footstepClip;
+    private bool footstepClipPlaying = false;
+    public AudioClip jumpSound;
+    
+    public AudioClip dashSound;
+    
+    public AudioClip attackSound;
+   
+    
+    
+    
     
     
     
@@ -72,109 +91,130 @@ public class OskarController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         wallJumpDirection.Normalize();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
+{
+    moveInput = Input.GetAxisRaw("Horizontal");
+    animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+    // Flip del personaje y attackPoint
+    if (moveInput != 0 && !isWallJumping)
     {
-        moveInput = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", moveInput);
-
-        // Flip del sprite
-        if (moveInput != 0 && !isWallJumping)
+        if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
         {
-            facingDirection = (int)moveInput;
-            spriteRenderer.flipX = moveInput < 0;
+            Flip();
         }
+    }
 
-        if (Time.time >= nextAttackTime)
+    // Sonido pasos
+    if (isGrounded && moveInput != 0 && !footstepClipPlaying)
+    {
+        footstepClipPlaying = true;
+        footstepSource.clip = footstepClip;
+        footstepSource.Play();
+    }
+    else if ((!isGrounded || moveInput == 0) && footstepClipPlaying)
+    {
+        footstepClipPlaying = false;
+        footstepSource.Stop();
+    }
+
+    // Ataque
+    if (Time.time >= nextAttackTime)
+    {
+        if (Input.GetMouseButtonDown(0)) // Click izquierdo
         {
-            if (Input.GetMouseButtonDown(0)) // Click izquierdo
-            {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+            Attack();
+            nextAttackTime = Time.time + 1f / attackRate;
         }
-        // Chequeos de suelo y pared
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        Vector2 wallCheckPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
-        isTouchingWall = Physics2D.OverlapCircle(wallCheckPos, wallCheckRadius, wallLayer);
+    }
 
-        if (isGrounded)
+    // Chequeos de suelo y pared
+    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    Vector2 wallCheckPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
+    isTouchingWall = Physics2D.OverlapCircle(wallCheckPos, wallCheckRadius, wallLayer);
+
+    if (isGrounded)
+    {
+        jumpCount = maxJumps;
+    }
+
+    isWallSliding = isTouchingWall && !isGrounded && moveInput != 0 && !isWallJumping && !isDashing;
+
+    if (isWallSliding)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
+    }
+
+    // Saltos
+    if (Input.GetButtonDown("Jump"))
+    {
+        animator.SetBool("isJumping", true);
+        if (isGrounded || (jumpCount > 0 && !isWallSliding))
         {
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
+            audioSource.PlayOneShot(jumpSound);
+
+            rb.velocity = new Vector2(rb.velocity.x, 0f); // Reinicia velocidad en Y
+            rb.velocity += Vector2.up * jumpForce;
+
+            jumpCount--;
+        }
+        else if (isWallSliding)
+        {
+            isWallJumping = true;
+            wallJumpTime = Time.time + wallJumpDuration;
+
+            rb.velocity = new Vector2(-facingDirection * wallJumpForce * wallJumpDirection.x,
+                                       wallJumpForce * wallJumpDirection.y);
+
+            // Ya no uses spriteRenderer.flipX aquí
+            // spriteRenderer.flipX = facingDirection > 0;
             jumpCount = maxJumps;
         }
+    }
 
-        isWallSliding = isTouchingWall && !isGrounded && moveInput != 0 && !isWallJumping && !isDashing;
-
-        if (isWallSliding)
+    if (Input.GetButton("Jump") && isJumping && !isDashing)
+    {
+        if (jumpTimeCounter > 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce * jumpForceMultiplier);
+            jumpTimeCounter -= Time.deltaTime;
         }
-
-        // Saltos
-        if (Input.GetButtonDown("Jump"))
-        {
-            animator.SetBool("isJumping", true);
-            if (isGrounded || (jumpCount > 0 && !isWallSliding))
-            {
-                isJumping = true;
-                jumpTimeCounter = jumpTime;
-
-                rb.velocity = new Vector2(rb.velocity.x, 0f); // Reinicia velocidad en Y
-                rb.velocity += Vector2.up * jumpForce;
-
-                jumpCount--;
-            }
-            else if (isWallSliding)
-            {
-                isWallJumping = true;
-                wallJumpTime = Time.time + wallJumpDuration;
-
-                rb.velocity = new Vector2(-facingDirection * wallJumpForce * wallJumpDirection.x,
-                                           wallJumpForce * wallJumpDirection.y);
-
-                spriteRenderer.flipX = facingDirection > 0;
-                jumpCount = maxJumps;
-            }
-        }
-
-        if (Input.GetButton("Jump") && isJumping && !isDashing)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce * jumpForceMultiplier);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-
-        if (Input.GetButtonUp("Jump"))
+        else
         {
             isJumping = false;
-            animator.SetTrigger("Jump");    // Al iniciar salto
         }
-
-        if (Time.time > wallJumpTime)
-        {
-            isWallJumping = false;
-        }
-
-        // Dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= lastDashTime + dashCooldown)
-        {
-            StartCoroutine(PerformDash());
-        }
-        animator.SetFloat("Speed", Mathf.Abs(moveInput));
-
-        // Animaciones booleanas
-        animator.SetBool("isJumping", !isGrounded && !isWallSliding);
-        animator.SetBool("isWallSliding", isWallSliding);
-        animator.SetBool("isDashing", isDashing);
-
     }
+
+    if (Input.GetButtonUp("Jump"))
+    {
+        isJumping = false;
+        animator.SetTrigger("Jump");    // Al iniciar salto
+    }
+
+    if (Time.time > wallJumpTime)
+    {
+        isWallJumping = false;
+    }
+
+    // Dash
+    if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= lastDashTime + dashCooldown)
+    {
+        StartCoroutine(PerformDash());
+        audioSource.PlayOneShot(dashSound);
+    }
+
+    animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+    // Animaciones booleanas
+    animator.SetBool("isJumping", !isGrounded && !isWallSliding);
+    animator.SetBool("isWallSliding", isWallSliding);
+    animator.SetBool("isDashing", isDashing);
+}
 
     void FixedUpdate()
     {
@@ -219,24 +259,29 @@ public class OskarController : MonoBehaviour
         if (groundCheck != null)
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
 
-        Vector2 gizmoPos = Application.isPlaying
-            ? (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y)
-            : (Vector2)transform.position + new Vector2(wallCheckOffset.x, wallCheckOffset.y);
+        Vector2 gizmoPos = Vector2.zero;
 
-        Gizmos.DrawWireSphere(gizmoPos, wallCheckRadius);
-        if(attackPoint == null) return;
+        // Usa la posición mundial del attackPoint para el gizmo
+        if (attackPoint != null)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            gizmoPos = attackPoint.position;
         }
+        else
+        {
+            // Como fallback, usa la posición del personaje + offset
+            gizmoPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
+        }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gizmoPos, attackRange);
     }
     void Attack()
     {
         // Animación personalizada de ataque
-        Debug.Log("Ataque realizado");
         if (animator != null)
         {
             animator.SetTrigger("Attack");
+            audioSource.PlayOneShot(attackSound);
         }
 
         // Detectar enemigos dentro del rango de ataque
@@ -248,7 +293,19 @@ public class OskarController : MonoBehaviour
             if (enemyScript != null)
             {
                 enemyScript.TakeDamage(attackDamage);
+                
             }
         }
+    }
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        facingDirection = isFacingRight ? 1 : -1;
+
+        // Solo invierte la escala X del transform para girar el personaje
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+
     }
 }
