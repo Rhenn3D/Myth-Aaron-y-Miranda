@@ -12,20 +12,18 @@ public class PatataLanzada : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    
+   void OnTriggerEnter2D(Collider2D other)
+{
+    if (other.CompareTag("Enemy"))
     {
-        if (other.CompareTag("Enemy"))
+        Phetonisio enemigo = other.GetComponent<Phetonisio>();
+        if (enemigo != null)
         {
-            // Destruir al enemigo
-            Destroy(other.gameObject);
-
-            // Destruir la patata
-            Destroy(gameObject);
+            enemigo.TakeDamage(1); // Le quitas 1 de vida o la cantidad que quieras
         }
-        else if (!other.CompareTag("Player") && !other.isTrigger)
-        {
-            // Si choca con algo que no sea el jugador, también se destruye
-            Destroy(gameObject);
-        }
+        Destroy(gameObject); // Destruyes la patata al impactar
     }
+}
+    
 }

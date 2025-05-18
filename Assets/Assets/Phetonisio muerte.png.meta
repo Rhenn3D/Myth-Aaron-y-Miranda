@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a535c1d4cd2e234694c42e0eb0155f4
+guid: 23de05da60c19ce48ac5978b9e8460e9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Phetonisio_0
+      name: Phetonisio muerte_0
       rect:
         serializedVersion: 2
-        x: 452
-        y: 1011
-        width: 378
-        height: 379
+        x: 0
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae27d82078af1384f96625e9cf48ff71
-      internalID: 52150490
+      spriteID: cdc4bca7f4a32c64890ee2988bc49777
+      internalID: -1045982037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phetonisio_1
+      name: Phetonisio muerte_1
       rect:
         serializedVersion: 2
-        x: 836
-        y: 1023
-        width: 378
-        height: 355
+        x: 64
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7036ca5224e2a914691878e6d668f0bd
-      internalID: 1881567834
+      spriteID: 0f6d05a090621334fb488835db5cec54
+      internalID: -1665634385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phetonisio_2
+      name: Phetonisio muerte_2
       rect:
         serializedVersion: 2
-        x: 1220
-        y: 1036
-        width: 378
-        height: 354
+        x: 128
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3717e9ac4406e604890dafde222abd41
-      internalID: 1321353345
+      spriteID: 01a4529cbf50f38449e5e0369ad35445
+      internalID: 2057934806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phetonisio_3
+      name: Phetonisio muerte_3
       rect:
         serializedVersion: 2
-        x: 449
-        y: 651
-        width: 378
-        height: 348
+        x: 192
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20a6114a893d2884991ea6141fbad177
-      internalID: -93251242
+      spriteID: 40ac84a118b375d4e88cbb7394667834
+      internalID: 373439226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phetonisio_4
+      name: Phetonisio muerte_4
       rect:
         serializedVersion: 2
-        x: 833
-        y: 657
-        width: 378
-        height: 354
+        x: 326
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7db5e6ad0faf5454bbe768006649a4d3
-      internalID: 441386482
+      spriteID: 7c2c5a2811e5a054dafe95a71705efe4
+      internalID: 1910330386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phetonisio_5
+      name: Phetonisio muerte_5
       rect:
         serializedVersion: 2
-        x: 1217
-        y: 645
-        width: 378
-        height: 354
+        x: 396
+        y: 0
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +229,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d51e9cf3fcfeb94cb017b123ba4ba5e
-      internalID: 1418387542
+      spriteID: a9b904b88783a034488c60c277a4d9f2
+      internalID: 531980441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_6
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ee0a7a13f08284cbee4d15953f6488
+      internalID: 1534730501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_7
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e81ecd8ea96592f49b1cff20d53d38fb
+      internalID: 1406492828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_8
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 0
+        width: 63
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3395e8763d557c047b5a8c5b3ac7cce6
+      internalID: -1904979900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_9
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 0
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ef3b2ef4c83594f973174b95299186
+      internalID: 1023175094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_10
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 0
+        width: 67
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a007faf4d6d3c9489260e3351d389f6
+      internalID: -1046571338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio muerte_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35d6df6da2ced74b8cf8b3a2c175c06
+      internalID: 961959969
       vertices: []
       indices: 
       edges: []
@@ -246,12 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Phetonisio_0: 52150490
-      Phetonisio_1: 1881567834
-      Phetonisio_2: 1321353345
-      Phetonisio_3: -93251242
-      Phetonisio_4: 441386482
-      Phetonisio_5: 1418387542
+      Phetonisio muerte_0: -1045982037
+      Phetonisio muerte_1: -1665634385
+      Phetonisio muerte_10: -1046571338
+      Phetonisio muerte_11: 961959969
+      Phetonisio muerte_2: 2057934806
+      Phetonisio muerte_3: 373439226
+      Phetonisio muerte_4: 1910330386
+      Phetonisio muerte_5: 531980441
+      Phetonisio muerte_6: 1534730501
+      Phetonisio muerte_7: 1406492828
+      Phetonisio muerte_8: -1904979900
+      Phetonisio muerte_9: 1023175094
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -27,14 +27,24 @@ public class Phetonisio : MonoBehaviour
     [Header("Salud del enemigo")]
     public int maxHealth = 3;
     private int currentHealth;
+    private bool isDead = false;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
     }
+    [Header("Animaciones")]
+    public Animator animator;
+
 
     void Update()
     {
+        if (isDead) return;
         // Movimiento
         transform.Translate(Vector2.right * speed * Time.deltaTime * (movingRight ? 1 : -1));
 
@@ -77,6 +87,8 @@ public class Phetonisio : MonoBehaviour
 
     void TryDamagePlayer(Collider2D other)
     {
+        if (isDead) return;  // No hace daño si está muriendo
+
         if (Time.time >= lastHitTime + damageCooldown)
         {
             HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -90,16 +102,26 @@ public class Phetonisio : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (isDead) return; // Si ya está muerto, no sigue restando salud ni nada
+
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
+            isDead = true;
             Die();
         }
     }
 
     void Die()
     {
-        // Aquí puedes poner animación de muerte, partículas, etc.
+        animator.SetTrigger("isDeath");
+        // Destruir después de 1 segundo (o el tiempo que dure la animación)
+        StartCoroutine(DestroyAfterDelay(1f));
+    }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 
@@ -118,4 +140,12 @@ public class Phetonisio : MonoBehaviour
             Gizmos.DrawLine(wallCheck.position, wallCheck.position + direction * wallCheckDistance);
         }
     }
+    IEnumerator WaitAndDie()
+    {
+        // Espera a que termine la animación de muerte (ajusta el tiempo si es necesario)
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
+    }
+
 }

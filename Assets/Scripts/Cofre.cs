@@ -93,6 +93,8 @@ public class Cofre : MonoBehaviour
             if (oskar != null)
             {
                 oskar.cantidadPatatas++;  // Suma 1 patata al jugador
+                oskar.cantidadPatatas++;  // Suma 1 patata al jugador
+                oskar.cantidadPatatas++;  // Suma 1 patata al jugador
                 Debug.Log("Patata recogida. Total: " + oskar.cantidadPatatas);
             }
         }

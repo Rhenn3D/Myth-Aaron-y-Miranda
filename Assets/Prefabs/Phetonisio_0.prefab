@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1258558998580039223
+--- !u!1 &925816158034736811
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,106 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4307200772890778868}
-  - component: {fileID: 7442448399381697547}
-  - component: {fileID: 4116244195596807010}
-  - component: {fileID: 6862373212235151795}
-  - component: {fileID: 4072544381822971200}
-  - component: {fileID: 392361366726930601}
+  - component: {fileID: 2898884341227775545}
   m_Layer: 7
-  m_Name: Phetonisio_0
+  m_Name: GroundCheck (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4307200772890778868
+--- !u!4 &2898884341227775545
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 925816158034736811}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.92, y: -0.73, z: 0}
+  m_LocalScale: {x: -1.3808466, y: 1.3631718, z: 1.3631718}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3970010984176237582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5659135293449400708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916026232741874160}
+  m_Layer: 7
+  m_Name: WallCheck (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1916026232741874160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659135293449400708}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.942, y: -0.098, z: 0}
+  m_LocalScale: {x: -1.3808466, y: 1.3631718, z: 1.3631718}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3970010984176237582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7498280250269534084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3970010984176237582}
+  - component: {fileID: 6041196403225362758}
+  - component: {fileID: 8434970861976257197}
+  - component: {fileID: 1751116532839482059}
+  - component: {fileID: 8790516827162938626}
+  - component: {fileID: 1882922239058575897}
+  - component: {fileID: 6246638210029965202}
+  m_Layer: 7
+  m_Name: Phetonisio_0
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3970010984176237582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7498280250269534084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.1138, y: 0.6557, z: 0}
-  m_LocalScale: {x: 0.9550157, y: 0.9550157, z: 0.9550157}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_LocalPosition: {x: 51.75, y: 6.25, z: 0}
+  m_LocalScale: {x: -0.9872, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2898884341227775545}
+  - {fileID: 1916026232741874160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7442448399381697547
+--- !u!212 &6041196403225362758
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 7498280250269534084}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,25 +141,25 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 2
   m_Sprite: {fileID: 52150490, guid: 6a535c1d4cd2e234694c42e0eb0155f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.4765625, y: 1.5351562}
+  m_Size: {x: 2.953125, y: 2.9609375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4116244195596807010
+--- !u!61 &8434970861976257197
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 7498280250269534084}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 2854d4db6e869fe4ba7ef2f448862b6d, type: 2}
@@ -120,27 +185,27 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.002585888, y: 0}
+  m_Offset: {x: -0.015529633, y: 0.03622985}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4765625, y: 1.4804688}
-    newSize: {x: 1.4765625, y: 1.5351562}
+    oldSize: {x: 1.89, y: 1.895}
+    newSize: {x: 2.953125, y: 2.9609375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2541571, y: 1.4804688}
+  m_Size: {x: 1.8942184, y: 1.86692}
   m_EdgeRadius: 0
---- !u!50 &6862373212235151795
+--- !u!50 &1751116532839482059
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 7498280250269534084}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -160,13 +225,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!82 &4072544381822971200
+--- !u!82 &8790516827162938626
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 7498280250269534084}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -256,23 +321,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &392361366726930601
+--- !u!114 &1882922239058575897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258558998580039223}
+  m_GameObject: {fileID: 7498280250269534084}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9457d8c7b0221d747b563896cde36985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 2898884341227775545}
   groundCheckDistance: 1
+  wallCheck: {fileID: 1916026232741874160}
+  wallCheckDistance: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   damage: 15
   damageCooldown: 1
+  maxHealth: 1
+  animator: {fileID: 6246638210029965202}
+--- !u!95 &6246638210029965202
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7498280250269534084}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca3355b40ac5c0f498edd5c1e20fbaf7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
