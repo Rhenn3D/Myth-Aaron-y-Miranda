@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Nubecita
   - Enemy
+  - DeathZone
   layers:
   - Default
   - TransparentFX

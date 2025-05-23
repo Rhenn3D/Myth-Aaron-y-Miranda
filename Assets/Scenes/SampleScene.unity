@@ -8365,6 +8365,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 3df9005556c8e7f4aa92fcf3f3cee2e3, type: 3}
   dashSound: {fileID: 8300000, guid: b4c42061d6af6524c9d05459c0f6d3f8, type: 3}
   attackSound: {fileID: 8300000, guid: 3e4e75d82765c154a883c7a7b6cd74d9, type: 3}
+  deathSound: {fileID: 8300000, guid: 07fcd62536b92b64fa8871c3668719cf, type: 3}
 --- !u!82 &304835664
 AudioSource:
   m_ObjectHideFlags: 0
@@ -53488,7 +53489,7 @@ GameObject:
   - component: {fileID: 1739044957}
   m_Layer: 8
   m_Name: Void Death
-  m_TagString: Untagged
+  m_TagString: DeathZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

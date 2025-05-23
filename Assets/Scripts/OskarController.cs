@@ -77,14 +77,15 @@ public class OskarController : MonoBehaviour
     public float invulnerabilidadDuracion = 1f;
     private bool isKnockedBack = false;
     public bool IsInvulnerable = false;
-    
+
     public Phetonisio enemyScript;
 
     [Header("Vida")]
     public int maxHealth = 50;
     private int currentHealth;
     private Slider barraVida;
-    public HealthBar healthBar; 
+    public HealthBar healthBar;
+    public bool isDead = false;
 
 
     [Header("Patatas")]
@@ -106,13 +107,17 @@ public class OskarController : MonoBehaviour
     public AudioClip dashSound;
 
     public AudioClip attackSound;
+    public AudioClip deathSound;
 
 
 
 
 
 
-
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
 
     void Start()
     {
@@ -384,7 +389,7 @@ public class OskarController : MonoBehaviour
 
 
 
-     IEnumerator ApplyKnockback(Vector2 direction)
+    IEnumerator ApplyKnockback(Vector2 direction)
     {
         isKnockedBack = true;
         float timer = 0f;
@@ -399,7 +404,7 @@ public class OskarController : MonoBehaviour
         isKnockedBack = false;
     }
 
-     IEnumerator Invulnerabilidad()
+    IEnumerator Invulnerabilidad()
     {
         IsInvulnerable = true;
         float tiempo = 0f;
@@ -449,15 +454,40 @@ public class OskarController : MonoBehaviour
             barraVida.value = (float)currentHealth / maxHealth;
         }
     }
-    void Die()
+    public void Die()
     {
         animator.SetTrigger("isDeath");
-        Invoke("LoadGameOverScene", 1.5f);
+        audioSource.PlayOneShot(deathSound);
+        Time.timeScale = 1f;
+        Invoke("LoadGameOverScene", 2f);
+
+        if (isDead) return;
+        isDead = true;
+
+        animator.SetTrigger("Death");
+        audioSource.PlayOneShot(deathSound);
+
+        StartCoroutine(LoadDeathSceneAfterDelay(1f));
     }
     void LoadGameOverScene()
     {
         SceneManager.LoadScene(2);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeathZone"))
+        {
+            Die(); // Llama a tu método de muerte
+        }
+    }
+    
+    IEnumerator LoadDeathSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay); // NO se ve afectado por Time.timeScale
+        SceneManager.LoadScene("GameOver"); // Cambia "GameOver" por el nombre de tu escena de muerte
+    }
+    
     
     
 }

@@ -7,8 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-     public void Retry()
+    public void Retry()
     {
         SceneManager.LoadScene(1);
+    }
+    
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
