@@ -9,12 +9,13 @@ public class HealthBar : MonoBehaviour
     public Image fillImage;
 
     [Range(0, 100)]
-    public float maxHealth = 100f;
+    public float maxHealth = 20f;
     private float currentHealth;
 
     
     void Start()
     {
+        maxHealth = 20f; // o sincronizar desde el personaje
         currentHealth = maxHealth;
         UpdateHealthBar();
     }
@@ -31,9 +32,10 @@ public class HealthBar : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void SetHealth(float value)
+    public void SetHealth(float current, float max)
     {
-        currentHealth = Mathf.Clamp(value, 0f, maxHealth);
+        currentHealth = Mathf.Clamp(current, 0f, max);
+        maxHealth = max;
         UpdateHealthBar();
     }
 

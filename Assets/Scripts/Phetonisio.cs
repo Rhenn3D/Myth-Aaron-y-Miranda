@@ -20,38 +20,43 @@ public class Phetonisio : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Daño al jugador")]
-    public float damage = 20f;
+    public float damage = 5f;
     public float damageCooldown = 1f;
-    private float lastHitTime;
+    private Dictionary<OskarController, float> lastHitTime = new Dictionary<OskarController, float>();
 
     [Header("Salud del enemigo")]
     public int maxHealth = 3;
     private int currentHealth;
     private bool isDead = false;
 
+    [Header("Sonidos")]
+    public AudioSource audioSource;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+
+    [Header("Animaciones")]
+    public Animator animator;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            Debug.LogWarning("No AudioSource found on " + gameObject.name);
     }
 
     void Start()
     {
         currentHealth = maxHealth;
     }
-    [Header("Animaciones")]
-    public Animator animator;
-
 
     void Update()
     {
         if (isDead) return;
-        // Movimiento
+
         transform.Translate(Vector2.right * speed * Time.deltaTime * (movingRight ? 1 : -1));
 
-        // Comprobar suelo
         bool noGround = !Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
-
-        // Comprobar pared
         Vector2 wallDirection = movingRight ? Vector2.right : Vector2.left;
         bool wallAhead = Physics2D.Raycast(wallCheck.position, wallDirection, wallCheckDistance, groundLayer);
 
@@ -69,36 +74,23 @@ public class Phetonisio : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (isDead) return; // No hacer nada si está muerto
+        if (isDead) return;
 
         if (other.CompareTag("Player"))
         {
             OskarController player = other.GetComponent<OskarController>();
             if (player != null)
             {
-                player.TakeDamage(1, transform); // Aquí está el empuje y daño
-            }
-        }
-    }
+                if (!lastHitTime.ContainsKey(player)) lastHitTime[player] = -Mathf.Infinity;
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")) TryDamagePlayer(other);
-    }
-
-    void TryDamagePlayer(Collider2D other)
-    {
-        if (isDead) return;
-
-        if (Time.time >= lastHitTime + damageCooldown)
-        {
-            HealthBar healthBar = FindObjectOfType<HealthBar>();
-            if (healthBar != null)
-            {
-                healthBar.TakeDamage(damage);
-                lastHitTime = Time.time;
+                if (Time.time >= lastHitTime[player] + damageCooldown && !player.IsInvulnerable)
+                {
+                    player.TakeDamage((int)damage, transform);
+                    lastHitTime[player] = Time.time;
+                    PlayHitSound();
+                }
             }
         }
     }
@@ -111,15 +103,14 @@ public class Phetonisio : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
+            audioSource.PlayOneShot(deathSound);
             Die();
         }
     }
 
-
     void Die()
     {
         animator.SetTrigger("isDeath");
-        // Destruir después de 1 segundo (o el tiempo que dure la animación)
         StartCoroutine(DestroyAfterDelay(1f));
     }
 
@@ -144,12 +135,12 @@ public class Phetonisio : MonoBehaviour
             Gizmos.DrawLine(wallCheck.position, wallCheck.position + direction * wallCheckDistance);
         }
     }
-    IEnumerator WaitAndDie()
+
+    public void PlayHitSound()
     {
-        // Espera a que termine la animación de muerte (ajusta el tiempo si es necesario)
-        yield return new WaitForSeconds(0.5f);
-
-        Destroy(gameObject);
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
     }
-
 }

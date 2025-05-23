@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a90e23cde8187c44af4547f801a174e
+guid: d140506282206fd438e25aacc732f817
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,9 +70,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondos_0
+      name: Teclas_0
       rect:
         serializedVersion: 2
-        x: 1560
-        y: 1987
-        width: 24
-        height: 5
+        x: 154
+        y: 488
+        width: 52
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20281822391b0624ca3f83c0fb4b99c3
-      internalID: 1039786810
+      spriteID: 45bee62a083647441af95f6c66714a4c
+      internalID: -1364605257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos_1
+      name: Teclas_1
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 1987
-        width: 32
-        height: 5
+        x: 216
+        y: 487
+        width: 67
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 643f33003794b2a44bbe7fd1b1cfe904
-      internalID: 2080874642
+      spriteID: e8ce28d6cd2a7f540b8a09d1db4d9f3d
+      internalID: 235403159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos_2
+      name: Teclas_2
       rect:
         serializedVersion: 2
-        x: 1688
-        y: 1987
-        width: 16
-        height: 5
+        x: 474
+        y: 470
+        width: 48
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21b0b527f6d8eeb4195f97b544056d74
-      internalID: 387456724
+      spriteID: 11b1f85536f4852478d3057c13bf9dba
+      internalID: 1229601692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos_3
+      name: Teclas_3
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1192
-        width: 1537
-        height: 765
+        x: 154
+        y: 430
+        width: 52
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a6b5f63c0a7fb46952b9802a95297d
-      internalID: -1317139068
+      spriteID: 5e96792fa28df1d48967abf82eeb9a5c
+      internalID: -50234423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos_4
+      name: Teclas_4
       rect:
         serializedVersion: 2
-        x: 263
-        y: 254
-        width: 1536
-        height: 768
+        x: 346
+        y: 430
+        width: 52
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +208,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0016bfdfec655424c8a09d6f231f264d
-      internalID: -1679075712
+      spriteID: 7e89aacbe24185a4bbdbd02e5133b82b
+      internalID: 1194354487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Teclas_5
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 394
+        width: 48
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de01d9cfede4702489ba7ce07c426d4e
+      internalID: -1663836528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Teclas_6
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 362
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9583b72a0115294588f001dbb960ec9
+      internalID: 763026705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Teclas_7
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 238
+        width: 116
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b775f5f953a7aac4984d945cf0873978
+      internalID: -480435072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Teclas_8
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 174
+        width: 148
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67c58b123cc78cc45a65b2fe05baceb9
+      internalID: -387265444
       vertices: []
       indices: 
       edges: []
@@ -225,11 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fondos_0: 1039786810
-      Fondos_1: 2080874642
-      Fondos_2: 387456724
-      Fondos_3: -1317139068
-      Fondos_4: -1679075712
+      Teclas_0: -1364605257
+      Teclas_1: 235403159
+      Teclas_2: 1229601692
+      Teclas_3: -50234423
+      Teclas_4: 1194354487
+      Teclas_5: -1663836528
+      Teclas_6: 763026705
+      Teclas_7: -480435072
+      Teclas_8: -387265444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

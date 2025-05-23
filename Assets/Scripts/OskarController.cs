@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OskarController : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class OskarController : MonoBehaviour
     public int maxJumps = 2;
     private int jumpCount;
 
-    [Header("Wall Jump")]
+    [Header("Wall isJumping")]
     public float wallJumpForce = 14f;
     public Vector2 wallJumpDirection = new Vector2(1, 1);
     public float wallJumpDuration = 0.2f;
@@ -75,7 +76,16 @@ public class OskarController : MonoBehaviour
     public AudioClip hurtSound;
     public float invulnerabilidadDuracion = 1f;
     private bool isKnockedBack = false;
-    private bool isInvulnerable = false;
+    public bool IsInvulnerable = false;
+    
+    public Phetonisio enemyScript;
+
+    [Header("Vida")]
+    public int maxHealth = 50;
+    private int currentHealth;
+    private Slider barraVida;
+    public HealthBar healthBar; 
+
 
     [Header("Patatas")]
     public int cantidadPatatas = 0; // Cantidad actual de patatas
@@ -87,7 +97,7 @@ public class OskarController : MonoBehaviour
 
 
     [Header("Sonidos")]
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     public AudioSource footstepSource;
     public AudioClip footstepClip;
     private bool footstepClipPlaying = false;
@@ -112,6 +122,13 @@ public class OskarController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         UpdatePatatasUI();
+
+        currentHealth = maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth, maxHealth);
+
+        }
 
     }
 
@@ -147,7 +164,7 @@ public class OskarController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // Click izquierdo
             {
-                Attack();
+                AttackAnimation();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
@@ -219,7 +236,7 @@ public class OskarController : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
-            animator.SetTrigger("Jump");    // Al iniciar salto
+            animator.SetTrigger("isJumping");    // Al iniciar salto
         }
 
         if (Time.time > wallJumpTime)
@@ -239,7 +256,7 @@ public class OskarController : MonoBehaviour
         // Animaciones booleanas
         animator.SetBool("isJumping", !isGrounded && !isWallSliding);
         animator.SetBool("isWallSliding", isWallSliding);
-        animator.SetBool("isDashing", isDashing);
+        animator.SetBool("Dashing", isDashing);
     }
 
 
@@ -306,12 +323,7 @@ public class OskarController : MonoBehaviour
     }
     void Attack()
     {
-        // Animación personalizada de ataque
-        if (animator != null)
-        {
-            animator.SetTrigger("Attack");
-            audioSource.PlayOneShot(attackSound);
-        }
+
 
         // Detectar enemigos dentro del rango de ataque
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -322,8 +334,16 @@ public class OskarController : MonoBehaviour
             if (enemyScript != null)
             {
                 enemyScript.TakeDamage(attackDamage);
-
             }
+        }
+    }
+    void AttackAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+            audioSource.PlayOneShot(attackSound);
+            Attack();
         }
     }
     void Flip()
@@ -331,28 +351,40 @@ public class OskarController : MonoBehaviour
         isFacingRight = !isFacingRight;
         facingDirection = isFacingRight ? 1 : -1;
 
-        // Solo invierte la escala X del transform para girar el personaje
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
 
+        // Opcional: si attackPoint no es hijo o no se mueve, ajustar su posición aquí
     }
 
-    public void TakeDamage(int damage, Transform source)
+    public void TakeDamage(int amount, Transform enemyTransform)
     {
-        if (isInvulnerable) return;
+        if (IsInvulnerable) return;
 
-        // Reproducir sonido de daño
+        currentHealth -= amount;
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth, maxHealth);
+
+        }
+
         audioSource.PlayOneShot(hurtSound);
 
-        // Calcular dirección de retroceso
-        Vector2 knockbackDir = (transform.position - source.position).normalized;
+        Vector2 knockbackDir = (transform.position - enemyTransform.position).normalized;
         StartCoroutine(ApplyKnockback(knockbackDir));
         StartCoroutine(Invulnerabilidad());
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 
-    private IEnumerator ApplyKnockback(Vector2 direction)
+
+     IEnumerator ApplyKnockback(Vector2 direction)
     {
         isKnockedBack = true;
         float timer = 0f;
@@ -367,9 +399,9 @@ public class OskarController : MonoBehaviour
         isKnockedBack = false;
     }
 
-    private IEnumerator Invulnerabilidad()
+     IEnumerator Invulnerabilidad()
     {
-        isInvulnerable = true;
+        IsInvulnerable = true;
         float tiempo = 0f;
         float intervalo = 0.1f;
 
@@ -381,7 +413,7 @@ public class OskarController : MonoBehaviour
         }
 
         spriteRenderer.enabled = true; // Asegura que quede visible
-        isInvulnerable = false;
+        IsInvulnerable = false;
     }
 
     public void recogerPatata()
@@ -394,12 +426,10 @@ public class OskarController : MonoBehaviour
         if (cantidadPatatas > 0)
         {
             GameObject patata = Instantiate(prefabPatata, puntoLanzamiento.position, Quaternion.identity);
-            Rigidbody2D rb = patata.GetComponent<Rigidbody2D>();
-            float direccion = transform.localScale.x; // para que lance hacia la dirección que mira el personaje
-            rb.velocity = new Vector2(10f * direccion, 0); // velocidad horizontal
-
-            cantidadPatatas--; // ↓↓↓↓↓ Asegúrate de tener esta línea
-            ActualizarUI();    // y esta para que el número se actualice en el HUD
+            Rigidbody2D rbPatata = patata.GetComponent<Rigidbody2D>();
+            rbPatata.velocity = new Vector2(fuerzaLanzamiento * facingDirection, 0);
+            cantidadPatatas--;
+            ActualizarUI();
         }
     }
     void UpdatePatatasUI()
@@ -413,5 +443,21 @@ public class OskarController : MonoBehaviour
         {
             patatasCountText.text = "x " + cantidadPatatas.ToString();
         }
+
+        if (barraVida != null)
+        {
+            barraVida.value = (float)currentHealth / maxHealth;
+        }
     }
+    void Die()
+    {
+        animator.SetTrigger("isDeath");
+        Invoke("LoadGameOverScene", 1.5f);
+    }
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene(2);
+    }
+    
+    
 }
