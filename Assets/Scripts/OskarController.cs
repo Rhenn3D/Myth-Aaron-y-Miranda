@@ -175,7 +175,7 @@ public class OskarController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1)) // Botón derecho del ratón
         {
-            LanzarPatata();
+            LanzarPatataAnimation();
         }
 
 
@@ -348,7 +348,7 @@ public class OskarController : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(attackSound);
-            Attack();
+           
         }
     }
     void Flip()
@@ -436,17 +436,35 @@ public class OskarController : MonoBehaviour
             cantidadPatatas--;
             ActualizarUI();
         }
+
+        else if (cantidadPatatas <= 0)
+        {
+            return;
+        }
+    }
+
+    public void LanzarPatataAnimation()
+    {
+        if (cantidadPatatas > 0)
+        {
+           animator.SetTrigger("LanzarPatata");
+        }
+        else if (cantidadPatatas <= 0)
+        {
+            return;
+        }
+        
     }
     void UpdatePatatasUI()
     {
         if (patatasCountText != null)
-            patatasCountText.text = "Patatas: " + cantidadPatatas.ToString();
+            patatasCountText.text = "Patatoes: " + cantidadPatatas.ToString();
     }
     void ActualizarUI()
     {
         if (patatasCountText != null)
         {
-            patatasCountText.text = "x " + cantidadPatatas.ToString();
+            patatasCountText.text = "Potatoes: " + cantidadPatatas.ToString();
         }
 
         if (barraVida != null)

@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,7 +108,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Throw_0
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 849
+        width: 204
+        height: 348
+      alignment: 9
+      pivot: {x: 0.7072966, y: 0.8540804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67455dc566ba80a4f83d7735bffdd328
+      internalID: -1177375824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_1
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 849
+        width: 204
+        height: 348
+      alignment: 9
+      pivot: {x: 0.7072966, y: 0.8687467}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65be00a5e551bbc4a8fc78a16478048b
+      internalID: 1513428804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_2
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 853
+        width: 276
+        height: 348
+      alignment: 9
+      pivot: {x: 0.5436249, y: 0.8748211}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb2cd02b495cf09488e9c331c770a36d
+      internalID: 531855303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_3
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 844
+        width: 228
+        height: 360
+      alignment: 9
+      pivot: {x: 0.7435078, y: 0.7917199}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db9eac52ef4555a40804781fb9f2b386
+      internalID: 1783808612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_4
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 870
+        width: 210
+        height: 330
+      alignment: 9
+      pivot: {x: 0.71341497, y: 0.77567285}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b457a21e05b2b4f872aba6fc2de159
+      internalID: 990272485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Throw_5
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 867
+        width: 210
+        height: 330
+      alignment: 9
+      pivot: {x: 0.71603364, y: 0.7749508}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8203c7c444e6e1a4b8dbf4e9b993e3a0
+      internalID: -953002128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +245,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Throw_0: -1177375824
+      Throw_1: 1513428804
+      Throw_2: 531855303
+      Throw_3: 1783808612
+      Throw_4: 990272485
+      Throw_5: -953002128
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

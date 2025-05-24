@@ -3283,7 +3283,7 @@ Transform:
   m_GameObject: {fileID: 145391228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45238072, y: -0.55, z: -0.80939484}
+  m_LocalPosition: {x: 0.45238072, y: -0.097, z: -0.80939484}
   m_LocalScale: {x: 0.7936508, y: 0.7936508, z: 0.7936508}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8172,7 +8172,7 @@ Transform:
   m_GameObject: {fileID: 304835654}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.8, y: -0.5, z: 0.061974764}
+  m_LocalPosition: {x: 61.2, y: 19.1, z: 0.061974764}
   m_LocalScale: {x: 1.26, y: 1.26, z: 1.26}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8355,6 +8355,7 @@ MonoBehaviour:
   enemyScript: {fileID: 0}
   maxHealth: 20
   healthBar: {fileID: 380698136}
+  isDead: 0
   cantidadPatatas: 0
   prefabPatata: {fileID: 3744931909161017722, guid: 9f4dca8831064f74e9586f2bfb99a34c, type: 3}
   puntoLanzamiento: {fileID: 145391229}
@@ -10305,7 +10306,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.3084946, y: 0.48641777}
+  m_Offset: {x: -4.3084946, y: 0.5330591}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10316,7 +10317,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.7612, y: 2.1144524}
+  m_Size: {x: 9.7612, y: 2.207735}
   m_EdgeRadius: 0
 --- !u!1 &361699067
 GameObject:
@@ -18849,7 +18850,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Presiona E para abrir
+  m_Text: Press "E" to open
 --- !u!222 &637090636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19094,6 +19095,7 @@ Transform:
   - {fileID: 23184964}
   - {fileID: 634122532}
   - {fileID: 1421932793}
+  - {fileID: 2075771121}
   m_Father: {fileID: 1614144601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653816099
@@ -23317,9 +23319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cerrar
-
-'
+  m_Text: Close
 --- !u!222 &801715518
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24853,8 +24853,8 @@ MonoBehaviour:
   panelObjeto: {fileID: 1025706357}
   textoDescripcion: {fileID: 1151821713}
   imagenObjeto: {fileID: 610080908}
-  descripcionObjeto: "Un peque\xF1o tub\xE9rculo. Parece un buen objeto para ser
-    lanzado."
+  descripcionObjeto: A small tubercle. It looks like a good item to be throwed.  
+    Press RightClick to throw.
   spriteObjeto: {fileID: -167527529, guid: cdf4fecd677d84a4e8a3cf9f3962e16d, type: 3}
   textoInteractuarUI: {fileID: 637090634}
   velocidadFlotacion: 5
@@ -26439,7 +26439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Patata
+  m_Text: Potato
 --- !u!1 &893508646
 GameObject:
   m_ObjectHideFlags: 0
@@ -33574,8 +33574,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 93, y: -168.806}
-  m_SizeDelta: {x: 518.298, y: 92.8757}
+  m_AnchoredPosition: {x: 93, y: -183.4}
+  m_SizeDelta: {x: 518.298, y: 129.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1151821712
 CanvasRenderer:
@@ -33607,7 +33607,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: f3e61d1005e7d7c4c9ba06794bc14895, type: 3}
-    m_FontSize: 31
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -33618,7 +33618,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Una peque\xF1o tub\xE9rculo. Parece un buen objeto para ser lanzado."
+  m_Text: "A small tubercle. It looks like a good item to be throwed. \n\nPress RightClick
+    to throw."
 --- !u!1 &1152514822
 GameObject:
   m_ObjectHideFlags: 0
@@ -48631,7 +48632,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Potatoes: 0'
 --- !u!222 &1537481214
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -64353,6 +64354,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2035402321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2075771120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2075771121}
+  - component: {fileID: 2075771122}
+  m_Layer: 3
+  m_Name: GameObject (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2075771121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075771120}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -30.53, y: 15.82, z: -0.07852802}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 645230155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2075771122
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075771120}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -3.0575256, y: 0.020471096}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.401642, y: 0.22210217}
+  m_EdgeRadius: 0
 --- !u!1 &2080522045
 GameObject:
   m_ObjectHideFlags: 0
